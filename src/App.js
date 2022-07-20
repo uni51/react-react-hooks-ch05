@@ -1,25 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
 
-function App() {
+import { Counter } from "./Counter";
+import { Hello } from "./Hello";
+
+const INITIAL_COUNT = 0;
+
+const INITIAL_NAME = "JavaScript";
+
+const SampleComponent = () => {
+  const [count, setCount] = useState(INITIAL_COUNT);
+  const [name, setName] = useState(INITIAL_NAME);
+
+  const countIncrement = () => setCount((prevCount) => prevCount + 1);
+  const countDecrement = () => setCount((prevCount) => prevCount - 1);
+  const countReset = () => setCount(INITIAL_COUNT);
+  const handleChangeName = (e) => {
+    setName(e.target.value);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Counter
+        count={count}
+        countIncrement={countIncrement}
+        countDecrement={countDecrement}
+        countReset={countReset}
+        initialCount={INITIAL_COUNT}
+      />
+      <Hello
+        name={name}
+        handleChangeName={handleChangeName}
+        initialName={INITIAL_NAME}
+      />
     </div>
   );
-}
+};
 
-export default App;
+export default function App() {
+  return (
+    <>
+      <SampleComponent />
+      <SampleComponent />
+    </>
+  );
+}
