@@ -1,17 +1,22 @@
 import React, { useContext } from "react";
 
-import { TextContext } from "./TextProvider";
+import { CountContext } from "./CountProvider";
 
 export const Third = () => {
-  const textData = useContext(TextContext);
+  const [count, setCount] = useContext(CountContext);
 
-  console.log(textData);
+  console.log(`現在のカウント：${count}`);
+
+  const handleClick = () => {
+    setCount((prevCount) => prevCount + 1);
+  };
 
   return (
     <>
       <p>
-        Thirdコンポーネント: <b>{textData}</b>
+        Thirdコンポーネント: <b>現在のカウント：{count}</b>
       </p>
+      <button onClick={handleClick}>+ 1 ボタン</button>
     </>
   );
 };
